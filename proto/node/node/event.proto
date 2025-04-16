@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package node.node;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+
+// Query defines the gRPC querier service.
+message EventPosminingCharged {
+  string sender = 1;
+  string posmined = 2;
+}

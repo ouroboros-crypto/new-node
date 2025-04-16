@@ -1,0 +1,15 @@
+syntax = "proto3";
+package node.node;
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+import "node/node/posmining.proto";
+
+message Profile {
+  
+  string owner = 1; 
+  uint64 balance = 2; 
+  repeated cosmos.base.v1beta1.Coin coins = 3 [(gogoproto.nullable) = false]; 
+  Posmining posmining = 4;
+}

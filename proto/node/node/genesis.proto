@@ -1,0 +1,17 @@
+syntax = "proto3";
+package node.node;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "node/node/params.proto";
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+
+// GenesisState defines the node module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

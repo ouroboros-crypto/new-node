@@ -1,0 +1,15 @@
+syntax = "proto3";
+package node.node;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "node/x/node/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

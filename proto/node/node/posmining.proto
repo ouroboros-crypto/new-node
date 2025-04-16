@@ -1,0 +1,13 @@
+syntax = "proto3";
+package node.node;
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+
+message Posmining {
+  
+  string owner = 1; 
+  cosmos.base.v1beta1.Coin coin = 2 [(gogoproto.nullable) = false]; 
+  string lastTransaction = 3;  
+}

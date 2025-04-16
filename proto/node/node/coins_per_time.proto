@@ -1,0 +1,12 @@
+syntax = "proto3";
+package node.node;
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+
+message CoinsPerTime {
+  
+  string day = 1; 
+  string hour = 2; 
+  string minute = 3; 
+  string second = 4; 
+}

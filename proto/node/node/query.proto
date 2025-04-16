@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package node.node;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "node/node/params.proto";
+import "node/node/posmining.proto";
+import "node/node/profile.proto";
+import "node/node/coins_per_time.proto";
+
+option go_package = "github.com/ouroboros-crypto/node/x/node/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/ouroboros-crypto/node/node/params";
+  
+  }
+  
+  // Queries a list of GetPosmining items.
+  rpc GetPosmining (QueryGetPosminingRequest) returns (QueryGetPosminingResponse) {
+    option (google.api.http).get = "/ouroboros-crypto/node/node/get_posmining/{address}/{coin}";
+  
+  }
+  
+  // Queries a list of GetProfile items.
+  rpc GetProfile (QueryGetProfileRequest) returns (QueryGetProfileResponse) {
+    option (google.api.http).get = "/ouroboros-crypto/node/node/get_profile/{address}";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetPosminingRequest {
+  string address = 1;
+  string coin    = 2;
+}
+
+message QueryGetPosminingResponse {
+  Posmining posmining = 1;
+  string posmined = 2;
+  CoinsPerTime coins_per_time = 3;
+  string coin = 4;
+}
+
+message QueryGetProfileRequest {
+  string address = 1;
+}
+
+message QueryGetProfileResponse {
+  string owner = 1;
+  string balance = 2;
+  QueryGetPosminingResponse posmining = 3;
+}
+

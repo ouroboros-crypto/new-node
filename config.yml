@@ -1,0 +1,64 @@
+validation: sovereign
+version: 1
+accounts:
+- name: alice
+  coins:
+  - 200000000ouro
+  mnemonic: lunch start try level winner rocket play census baby lumber judge climb
+    broccoli sure heavy update history rich trash chief certain coil trust neglect
+- name: bob
+  coins:
+  - 100000000ouro
+  mnemonic: second fun hover mind warfare dish flavor slot belt wise violin frozen
+    process thumb tell author opinion music stamp plug truth shrimp drift perfect
+- name: dev 
+  coins:
+  - 100000000ouro
+  address: ouro1x4dpwcaya9n7efcn2svf3de8n9rpw58gsux9pn
+- name: mnemo
+  coins:
+  - 100000000ouro
+  address: ouro1kf2e99grv5vef38pd7fqktnsjjldyftd2y7vyt
+faucet:
+  name: bob
+  coins:
+  - 100000ouro
+client:
+  typescript:
+    path: ts-client
+  openapi:
+    path: docs/static/openapi.yml
+genesis:
+  app_state:
+    slashing:
+      params:
+        slash_fraction_double_sign: "0.000000000000000000"
+        slash_fraction_downtime: "0.000000000000000000"
+    distirbution:
+      params:
+        community_tax: "0.000000000000000000"
+    staking:
+      params:
+        unbonding_time: "259200s"
+        bond_denom: ouro
+    mint:
+      minter:
+        inflation: "0.000000000000000000"
+      params:
+        mint_denom: ouro
+        inflation_rate_change: "0.000000000000000000"
+        inflation_max: "0.000000000000000000"
+        inflation_min: "0.000000000000000000"
+    crisis:
+      constant_fee:
+        denom: ouro
+  chain_id: ouroboros
+validators:
+- name: alice
+  bonded: 100000000ouro
+- name: validator1
+  bonded: 100000000ouro
+- name: validator2
+  bonded: 200000000ouro
+- name: validator3
+  bonded: 300000000ouro
