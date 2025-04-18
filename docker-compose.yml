@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  ouroboros-node:
+    container_name: ouroboros-fullnode
+    image: ouroboros-node:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./ouroboros_data:/home/ouroboros/.ouroboros
+    ports:
+      - "26656:26656"  # P2P
+      - "26657:26657"  # RPC
+      - "1317:1317"    # REST (if enabled)
+      - "9090:9090"    # gRPC (if enabled)
+    environment:
+      - MONIKER=my-node
+      - CHAIN_ID=ouroboros
+    command: >
+      bash -c "
+        if [ ! -f /home/ouroboros/.ouroboros/config/genesis.json ]; then
+          echo 'Fetching genesis and configs...';
+          curl -L https://ouroboros-crypto.s3.amazonaws.com/genesis.json  -o /home/ouroboros/.ouroboros/config/genesis.json &&
+          curl -L https://ouroboros-crypto.s3.amazonaws.com/config.toml  -o /home/ouroboros/.ouroboros/config/config.toml &&
+          curl -L https://ouroboros-crypto.s3.amazonaws.com/app.toml -o /home/ouroboros/.ouroboros/config/app.toml;
+        fi &&
+        if [ ! -d /home/ouroboros/.ouroboros/data ]; then
+          echo 'Fetching snapshot...';
+          curl -L https://ouroboros-crypto.s3.amazonaws.com/blockchain.tar.gz  | tar -xz -C /home/ouroboros/.ouroboros;
+        fi &&
+        ouroborosd start 
+      "

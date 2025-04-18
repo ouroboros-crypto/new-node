@@ -49,7 +49,7 @@ func NewRootCmd() *cobra.Command {
 
 	rootCmd := &cobra.Command{
 		Use:           app.Name + "d",
-		Short:         "Start node node",
+		Short:         "Start ouroboros node",
 		SilenceErrors: true,
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			// set the default command outputs
